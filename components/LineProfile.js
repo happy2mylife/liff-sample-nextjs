@@ -20,4 +20,5 @@ const LineProfile = React.memo((props) => {
   );
 });
 
+LineProfile.displayName = "LineProfile";
 export default LineProfile;

@@ -50,4 +50,5 @@ const LineQR = (props) => {
   );
 };
 
+LineQR.displayName = "LineQR";
 export default LineQR;
