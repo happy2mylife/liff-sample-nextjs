@@ -22,10 +22,10 @@ const LineQR = (props) => {
     liff
       .scanCodeV2()
       .then((result) => {
-        console.log(result);
+        setQrResult(result);
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMsg(err);
       });
   };
 
