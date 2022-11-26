@@ -1,6 +1,8 @@
 import Head from "next/head";
 import packageJson from "../package.json";
 import { Alert, Button } from "react-bootstrap";
+import LineProfile from "../components/LineProfile";
+import { useState } from "react";
 
 export default function Home(props) {
   /** You can access to liff and liffError object through the props.
@@ -10,6 +12,8 @@ export default function Home(props) {
    *  Learn more about LIFF API documentation (https://developers.line.biz/en/reference/liff)
    **/
   const { liff, liffError } = props;
+  const [profile, setProfile] = useState();
+
   const login = () => {
     liff.login({ redirectUri: "https://liff-sample-nextjs.vercel.app/" });
   };
@@ -18,8 +22,13 @@ export default function Home(props) {
       console.log("not login.");
       return;
     }
+
     liff.getProfile().then((profile) => {
-      console.log(profile);
+      setProfile({
+        displayName: `${profile.displayName}`,
+        pictureUrl: `${profile.pictureUrl}`,
+        statusMessage: `${profile.statusMessage}`,
+      });
     });
   };
 
@@ -29,13 +38,16 @@ export default function Home(props) {
         <title>LIFF Starter</title>
       </Head>
       <div className="home">
-        <Alert variant="primary">LINE　ログイン</Alert>
+        <Alert variant="primary">
+          LINE　{liff?.isLoggedIn() ? "ログイン済み" : "ログインしてください"}
+        </Alert>
         <Button variant="outline-primary" onClick={login}>
           ログイン
         </Button>
         <Button variant="outline-secondary" onClick={getProfile}>
           プロフィール取得
         </Button>
+        <LineProfile profile={profile} />
         <h1 className="home__title">
           Welcome to <br />
           <a
