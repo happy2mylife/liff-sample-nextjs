@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
+import React from "react";
 
-const LineProfile = (props) => {
+const LineProfile = React.memo((props) => {
   const { profile } = props;
   console.log(`render LineProfile.`);
 
@@ -17,6 +18,6 @@ const LineProfile = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default LineProfile;

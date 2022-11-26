@@ -3,6 +3,8 @@ import packageJson from "../package.json";
 import { Alert, Button } from "react-bootstrap";
 import LineProfile from "../components/LineProfile";
 import { useState } from "react";
+import Link from "next/link";
+import styles from "../styles/index.module.css";
 
 export default function Home(props) {
   /** You can access to liff and liffError object through the props.
@@ -41,12 +43,17 @@ export default function Home(props) {
         <Alert variant="primary">
           LINE　{liff?.isLoggedIn() ? "ログイン済み" : "ログインしてください"}
         </Alert>
-        <Button variant="outline-primary" onClick={login}>
-          ログイン
-        </Button>
-        <Button variant="outline-secondary" onClick={getProfile}>
-          プロフィール取得
-        </Button>
+        <div className={styles.line_container}>
+          <Button variant="outline-primary" onClick={login}>
+            ログイン
+          </Button>
+          <Button variant="outline-secondary" onClick={getProfile}>
+            プロフィール取得
+          </Button>
+          <Link href="qr">
+            <a>QR読み取り画面へ</a>
+          </Link>
+        </div>
         <LineProfile profile={profile} />
         <h1 className="home__title">
           Welcome to <br />
