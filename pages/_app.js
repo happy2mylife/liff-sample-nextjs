@@ -1,8 +1,10 @@
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
+  console.log("My App");
   const [liffObject, setLiffObject] = useState(null);
   const [liffError, setLiffError] = useState(null);
 
@@ -17,6 +19,7 @@ function MyApp({ Component, pageProps }) {
         .then(() => {
           console.log("liff.init() done");
           setLiffObject(liff);
+          console.log("liff.init() after");
         })
         .catch((error) => {
           console.log(`liff.init() failed: ${error}`);
@@ -34,7 +37,11 @@ function MyApp({ Component, pageProps }) {
   // to page component as property
   pageProps.liff = liffObject;
   pageProps.liffError = liffError;
-  return <Component {...pageProps} />;
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
 export default MyApp;

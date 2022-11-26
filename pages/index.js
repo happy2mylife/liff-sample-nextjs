@@ -1,6 +1,6 @@
 import Head from "next/head";
 import packageJson from "../package.json";
-import { Alert, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import LineProfile from "../components/LineProfile";
 import { useState } from "react";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default function Home(props) {
   const [profile, setProfile] = useState();
 
   const login = () => {
-    liff.login({ redirectUri: "https://liff-sample-nextjs.vercel.app/" });
+    liff.login();
   };
   const getProfile = () => {
     if (!liff.isLoggedIn()) {
@@ -40,9 +40,6 @@ export default function Home(props) {
         <title>LIFF Starter</title>
       </Head>
       <div className="home">
-        <Alert variant="primary">
-          LINE　{liff?.isLoggedIn() ? "ログイン済み" : "ログインしてください"}
-        </Alert>
         <div className={styles.line_container}>
           <Button variant="outline-primary" onClick={login}>
             ログイン
@@ -50,10 +47,10 @@ export default function Home(props) {
           <Button variant="outline-secondary" onClick={getProfile}>
             プロフィール取得
           </Button>
-          <Link href="qr">
+          <Link href="/qr">
             <a>QR読み取り画面へ</a>
           </Link>
-          <Link href="message">
+          <Link href="/message">
             <a>メッセージ送信画面へ</a>
           </Link>
         </div>
