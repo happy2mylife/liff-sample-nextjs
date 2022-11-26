@@ -53,6 +53,9 @@ export default function Home(props) {
           <Link href="qr">
             <a>QR読み取り画面へ</a>
           </Link>
+          <Link href="message">
+            <a>メッセージ送信画面へ</a>
+          </Link>
         </div>
         <LineProfile profile={profile} />
         <h1 className="home__title">
