@@ -28,12 +28,12 @@ const SendMessage = (props) => {
         },
       ])
       .then(() => {
-        completeMsg("送信しました。");
+        setCompleteMsg("送信しました。");
         setErrorMsg(null);
       })
       .catch((err) => {
         setErrorMsg(err);
-        completeMsg(null);
+        setCompleteMsg(null);
       })
       .finally(() => {});
   };
