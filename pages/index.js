@@ -10,7 +10,7 @@ export default function Home(props) {
    **/
   const { liff, liffError } = props;
   const login = () => {
-    liff.login({});
+    liff.login({ redirectUri: "https://liff-sample-nextjs.vercel.app/" });
   };
   const getProfile = () => {
     if (!liff.isLoggedIn()) {
