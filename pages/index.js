@@ -1,5 +1,6 @@
 import Head from "next/head";
 import packageJson from "../package.json";
+import { Alert, Button } from "react-bootstrap";
 
 export default function Home(props) {
   /** You can access to liff and liffError object through the props.
@@ -28,8 +29,13 @@ export default function Home(props) {
         <title>LIFF Starter</title>
       </Head>
       <div className="home">
-        <button onClick={login}>ログイン</button>
-        <button onClick={getProfile}>プロフィール取得</button>
+        <Alert variant="primary">LINE　ログイン</Alert>
+        <Button variant="outline-primary" onClick={login}>
+          ログイン
+        </Button>
+        <Button variant="outline-secondary" onClick={getProfile}>
+          プロフィール取得
+        </Button>
         <h1 className="home__title">
           Welcome to <br />
           <a

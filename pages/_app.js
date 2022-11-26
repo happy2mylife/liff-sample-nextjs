@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
