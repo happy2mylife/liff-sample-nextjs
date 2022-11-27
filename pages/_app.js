@@ -1,7 +1,10 @@
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
+import { createContext } from "react";
 import Layout from "../components/Layout";
+
+export const LiffContext = createContext();
 
 function MyApp({ Component, pageProps }) {
   console.log("My App");
@@ -37,10 +40,13 @@ function MyApp({ Component, pageProps }) {
   // to page component as property
   pageProps.liff = liffObject;
   pageProps.liffError = liffError;
+
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <LiffContext.Provider value={liffObject}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </LiffContext.Provider>
   );
 }
 

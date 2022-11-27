@@ -2,8 +2,12 @@ import Head from "next/head";
 import { Alert } from "react-bootstrap";
 import Link from "next/link";
 import styles from "./Layout.module.css";
+import { LiffContext } from "../pages/_app";
+import { useContext } from "react";
 
-const Layout = ({ children, liff }) => {
+const Layout = ({ children }) => {
+  const liff = useContext(LiffContext);
+
   return (
     <div>
       <Head>
