@@ -24,7 +24,7 @@ const SendMessage = (props) => {
       .sendMessages([
         {
           type: "text",
-          text: `${inputMessage.current?.value}`,
+          text: inputMessage.current?.value,
         },
       ])
       .then(() => {
