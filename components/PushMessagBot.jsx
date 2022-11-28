@@ -2,14 +2,15 @@ import Head from "next/head";
 import Link from "next/link";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useState, useRef } from "react";
+// import { Client } from "@line/bot-sdk";
 
-const SendMessage = (props) => {
+const PushMessagBot = (props) => {
   const { liff } = props;
   const [errorMsg, setErrorMsg] = useState();
   const [completeMsg, setCompleteMsg] = useState();
   const inputMessage = useRef(null);
 
-  const sendMessage = () => {
+  const pushMessageBot = async () => {
     if (!liff) {
       console.log("liff is null");
       return;
@@ -20,22 +21,24 @@ const SendMessage = (props) => {
       return;
     }
 
-    liff
-      .sendMessages([
-        {
-          type: "text",
-          text: `${inputMessage.current?.value}`,
+    liff.getProfile().then(async (profile) => {
+      await fetch("/api/test", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      ])
-      .then(() => {
-        setCompleteMsg("送信しました。");
-        setErrorMsg(null);
+        body: JSON.stringify({
+          message: inputMessage.current?.value,
+          targetUserId: profile.userId,
+        }),
       })
-      .catch((err) => {
-        setErrorMsg(err);
-        setCompleteMsg(null);
-      })
-      .finally(() => {});
+        .then(() => {
+          console.log("送信成功");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   };
 
   return (
@@ -54,11 +57,11 @@ const SendMessage = (props) => {
             ref={inputMessage}
           ></Form.Control>
           <Form.Text id="inputMessage">
-            トークルームにメッセージを送信します。
+            トークルームにBotからメッセージをプッシュ通知します。
           </Form.Text>
         </div>
         <div>
-          <Button onClick={sendMessage}>送信</Button>
+          <Button onClick={pushMessageBot}>送信</Button>
         </div>
         <div>
           <Link href="/">
@@ -70,5 +73,5 @@ const SendMessage = (props) => {
   );
 };
 
-SendMessage.displayName = "SendMessage";
-export default SendMessage;
+PushMessagBot.displayName = "PushMessagBot";
+export default PushMessagBot;

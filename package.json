@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@line/bot-sdk": "^7.5.2",
     "@line/liff": "2.16.0",
     "bootstrap": "^5.2.3",
     "next": "11.1.3",

@@ -53,6 +53,9 @@ export default function Home(props) {
           <Link href="/message">
             <a>メッセージ送信画面へ</a>
           </Link>
+          <Link href="/pushMessage">
+            <a>Botプッシュメッセージ</a>
+          </Link>
         </div>
         <LineProfile profile={profile} />
         <h1 className="home__title">
