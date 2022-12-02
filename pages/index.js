@@ -61,6 +61,9 @@ export default function Home(props) {
           </Button>
         </div>
         <div>
+          <Link href="/lineToken">
+            <a>Token取得</a>
+          </Link>
           <Link href="/qr">
             <a>QR読み取り画面へ</a>
           </Link>
