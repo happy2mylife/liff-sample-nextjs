@@ -18,6 +18,12 @@ export default function Home(props) {
   const [errorMsg, setErrorMsg] = useState(null);
 
   const login = () => {
+    if (liff.isLoggedIn()) {
+      liff.logout();
+      setProfile(null);
+      return;
+    }
+
     liff.login().then(() => {
       setErrorMsg(null);
     });
