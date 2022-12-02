@@ -1,6 +1,6 @@
 import Head from "next/head";
 import packageJson from "../package.json";
-import { Button } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import LineProfile from "../components/LineProfile";
 import { useState } from "react";
 import Link from "next/link";
@@ -15,13 +15,18 @@ export default function Home(props) {
    **/
   const { liff, liffError } = props;
   const [profile, setProfile] = useState();
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const login = () => {
-    liff.login();
+    liff.login().then(() => {
+      setErrorMsg(null);
+    });
   };
+
   const getProfile = () => {
     if (!liff.isLoggedIn()) {
       console.log("not login.");
+      setErrorMsg("ログインしてください");
       return;
     }
 
@@ -40,13 +45,16 @@ export default function Home(props) {
         <title>LIFF Starter</title>
       </Head>
       <div className="home">
+        {errorMsg && <Alert variant="warning">{errorMsg}</Alert>}
         <div className={styles.line_container}>
           <Button variant="outline-primary" onClick={login}>
-            ログイン
+            {liff && liff.isLoggedIn() ? "ログアウト" : "ログイン"}
           </Button>
           <Button variant="outline-secondary" onClick={getProfile}>
             プロフィール取得
           </Button>
+        </div>
+        <div>
           <Link href="/qr">
             <a>QR読み取り画面へ</a>
           </Link>

@@ -20,6 +20,13 @@ const SendMessage = (props) => {
       return;
     }
 
+    if (!liff.isInClient()) {
+      // ユーザーの代わりに、LIFFアプリが開かれているトーク画面にメッセージを送信します。この機能は1対1のトークルームから起動したLIFFアプリのLIFFブラウザ内でのみ利用できます
+      // https://developers.line.biz/ja/reference/liff/#send-messages
+      setErrorMsg("LIFFブラウザ内でのみ利用できます");
+      return;
+    }
+
     liff
       .sendMessages([
         {
